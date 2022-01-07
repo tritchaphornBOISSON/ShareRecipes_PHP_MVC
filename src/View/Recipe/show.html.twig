@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    
+    <div class="container container-margin">
+        <h2 class="display-4 text-center">Recipe: {{ recipe.title }}</h2>
+        <div class="image-recipe">
+            <img class="" src="data:image/jpeg;base64,{{ recipe.image}}" alt="">
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4 col-sm-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-3">Ingredients List</h3>
+                        <p class="card-text mb-auto add-new-line">{{ recipe.ingredient }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="row g-0  overflow-hidden flex-md-row mb-4  h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-3">Direction</h3>
+                        <p class="card-text mb-auto add-new-line">{{ recipe.direction }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col-6 p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0 hand-writing">Recipe by ...</h3>
+                        <div class="mb-1 text-muted">Created at {{ recipe.created_at }}</div>
+                    </div>
+                    <div class="col-6 p-4 d-flex flex-column position-static">
+                        <div class="mb-auto">
+                            <p class="mb-2">If you want to edit or delete your recipe, please click below.</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <a class="btn button-green text-white" role="button" href="/recipes/edit?id={{ recipe.id }}">Edit Recipe</a>
+                                </div>
+                                <div class="col-4">
+                                    <form action="/recipes/delete" method="POST">
+                                        <input type="hidden" name="id" value="{{ recipe.id }}">
+                                        <button class="btn button-orange text-dark">Delete Recipe</button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

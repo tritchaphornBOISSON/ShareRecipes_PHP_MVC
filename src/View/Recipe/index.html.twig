@@ -1,0 +1,74 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid" id="cover-home" >
+        <div class="p-4 p-md-5 mb-4 intro-home">
+            <div class="col-md-6 px-0">
+            </div>
+            <div class="col-md-6 px-0 intro-home-text">
+                <h1 class="display-4">Share Recipes : A universe where all food lovers enjoy!</h1>
+                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+                <p class="lead mb-0"><a href="#" class="text-center btn button-green  btn-lg text-white">Continue reading</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-margin" id="category-home">
+        <div class="row">
+            <h2 class="text-center display-4 hand-writing my-4">Discover all recipes!</h2>
+            <div class="col-lg-3 category-logo-home my-3">
+                <a href="#"><img src="/assets/images/cupcake.png" alt="logo-dessert">
+                <div class="text-logo my-3 text-center">Desserts &raquo;</div></a>
+            </div>
+            <div class="col-lg-3 category-logo-home my-3">
+                <a href="#"><img src="/assets/images/pizza.png" alt="logo-maindish">
+                <div class="text-logo my-3 text-center">Main Dishes &raquo;</div></a>
+            </div>
+            <div class="col-lg-3 category-logo-home my-3">
+                <a href="#"><img src="/assets/images/hotdog.png" alt="logo-snackt">
+                <div class="text-logo my-3 text-center">Sancks &raquo;</div></a>
+            </div>
+            <div class="col-lg-3 category-logo-home my-3">
+                <a href="#"><img src="/assets/images/coffee.png" alt="logo-drink">
+                <div class="text-logo my-3 text-center">Drinks &raquo;</div></a>
+            </div>
+        </div>
+    </div>
+    <div class="container container-margin">
+        <div class="p-4 p-md-5 mb-4 about-home">
+            <div class="col-md-6 px-0">
+                <h2 class="display-4 fst-italic">Share your precious moments with your loved ones</h2>
+                <p class="lead my-3 me-4">Choose any recipe shared by our members and make it with your family <span class="fw-bold fst-italic">or</span> become one of our member and share your own recipes so the others can try them.</p>
+                <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+            </div>
+            <div class="col-md-6 px-0 image-about-home">
+                <img src="/assets/images/food-3230799_1920.jpg" alt="cooking">
+            </div>
+        </div>
+    </div>
+    <div class="container container-margin" id="index-recipe">
+        <h2 class="text-center mt-5 display-4"><i class="fas fa-utensils pe-3" style="font-size: 2.5rem"></i>All Recipes<i class="fas fa-utensils ps-3" style="font-size: 2.5rem"></i></h2>
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% for recipe in recipes %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img src="data:image/jpeg;base64,{{ recipe.image}}" width="100%" height="250" class="bd-placeholder-img card-img-top" alt="food-image">
+                                <div class="card-body">
+                                    <a class="card-title-home" href="/recipes/show?id={{ recipe.id }}" class=""><h5 class="card-title hand-writing text-center">{{ recipe.title }}</h5></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="share-button-home my-3">
+            <a href="/recipes/add" class="btn button-orange mb-3 btn-lg">Share us a recipe!</a>
+            <a href="/recipes" class="btn button-green mb-3 text-white  btn-lg">See all recipes!</a>
+        </div>
+    </div>
+
+{% endblock %}

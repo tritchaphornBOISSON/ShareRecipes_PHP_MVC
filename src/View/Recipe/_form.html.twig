@@ -1,0 +1,36 @@
+<form action="" method="post" enctype='multipart/form-data'>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title:</label>
+        <span class="text-danger">{{ errors['title'] }}</span>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Your recipe name" value="{{ recipe.title }}" >
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <span class="text-danger">{{ errors['category'] }}</span>
+        <select name="category" class="form-select form-select-md" aria-label=".form-select-md example"  >
+            <option value="{{ recipe.category }}" selected>Select a category</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Main Dish">Main Dish</option>
+            <option value="Snack">Snack</option>
+            <option value="Drink">Drink</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="ingredient" class="form-label">List all ingredients:</label>
+        <span class="text-danger">{{ errors['ingredients'] }}</span>
+        <textarea class="form-control" id="ingredient" name="ingredient" rows="3" placeholder="Give us the shopping list!" >{{ recipe.ingredient }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="direction" class="form-label">Direction:</label>
+        <span class="text-danger">{{ errors['direction'] }}</span>
+        <textarea class="form-control" id="direction" name="direction" rows="3" placeholder="Tell us how?" >{{ recipe.direction }}</textarea>
+    </div>
+    <span class="text-danger">{{ errors['image'] }} </span>
+    <div class="input-group mb-3">
+        <input type="file" class="form-control" id="image" name="image" >
+        <label class="input-group-text" for="image">Upload an image</label>
+    </div>
+    <div class="mb-3 text-center">
+        <button class="btn button-green text-white btn-lg" type="submit">Submit A Recipe</button>
+    </div>
+</form>

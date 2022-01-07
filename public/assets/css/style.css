@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Dancing+Script:wght@400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+:root {
+    --dark-color: #2B2118;
+    --red-color: #6F1A07;
+    --orange-color: #FC9E4F;
+    --green-color: #519E8A;
+    --white-color: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+p {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-color);
+}
+a {
+    text-decoration: none !important;
+}
+h1 {
+    font-family: 'Cabin Sketch', cursive;
+}
+h2 {
+    color: var(--red-color);
+}
+.hand-writing {
+    font-family: 'Dancing Script', cursive;
+}
+.container-fluid {
+    padding: 0 !important;
+}
+.container-margin {
+    margin: 80px 0;
+}
+.container-75 {
+    width: 75% !important;
+}
+.button-green {
+    background-color: var(--green-color) !important;
+    border-color: var(--green-color) !important;
+}
+.button-orange {
+    background-color: var(--orange-color) !important;
+    border-color: var(--orange-color) !important;
+}
+
+/************ Navbar **************/
+#navbar {
+    background-color: var(--green-color);
+    height: 120px;
+    box-shadow: 0 4px 8px -2px;
+}
+.logo-navbar {
+    width: 180px;
+}
+.menu-navbar {
+    align-self: center;
+
+}
+#navbar a {
+    color: var(--white-color);
+    font-size: 18px;
+}
+.dropdown-item {
+    color: var(--dark-color) !important;
+}
+
+#cover-home {
+    background-image: url('/assets/images/background-g82139ab7d_1920.jpg');
+    height: 550px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+#cover-home p {
+    color: var(--white-color);
+}
+.intro-home {
+    display: flex;
+}
+.intro-home-text {
+     color: var(--white-color);
+}
+.intro-home-text h1{
+    font-weight: bold;
+}
+.category-logo-home img{
+    width: 40%;
+    display: block;
+    margin: auto;
+}
+#category-home h2 {
+    font-size: 5em;
+}
+.category-logo-home a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--green-color);
+    font-weight: bold;
+    font-size: 20px;
+}
+.about-home {
+    display: flex;
+}
+.image-about-home img {
+    width: 100%;
+}
+.card-title-home {
+    color: var(--green-color);
+}
+.card-title-home h5{
+    font-size: 30px;
+}
+.share-button-home {
+    display: block;
+    text-align: center;
+}
+/************ Show all recipes Page **************/
+.share-button-all {
+    display: block;
+    text-align: right;
+}
+
+
+/************ Single Recipe Page **************/
+.image-recipe img {
+    width: 500px;
+    display: block;
+    margin: auto;
+}
+.image-recipe {
+    margin: 60px 0;
+}
+.add-new-line{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/************ Login Page **************/
+#login-form img {
+    width: 250px;
+    display: block;
+    margin: auto;
+}
+.center-form {
+    display: block;
+    margin: auto;
+}
+.button-login {
+    display: block;
+    text-align: center;
+}
+/************ About Page **************/
+.about-head {
+    background-image: url("/assets/images/kagyana-2955466_1920.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 400px;
+    position: relative;
+}
+.about-head-text {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#about-detail {
+    display: block;
+    margin: auto;
+}
+.about-img-page img{
+    width: 100%;
+}
+
+/************ Footer **************/
+#footer{
+    background-color: var(--green-color);
+    height: 140px;
+}
+#footer a, #footer p {
+    color: var(--white-color);
+}
+#footer i {
+    font-size: 28px;
+}f
+
