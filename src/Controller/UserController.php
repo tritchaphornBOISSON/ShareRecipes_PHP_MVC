@@ -3,9 +3,17 @@
 namespace App\Controller;
 
 use App\Model\ItemManager;
+use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
+    private UserManager $userManager;
+
+    public function model(): UserManager
+    {
+        $this->userManager = new UserManager();
+        return $this->userManager;
+    }
     /**
      * List items
      */
@@ -19,8 +27,75 @@ class UserController extends AbstractController
 
     public function register(): string
     {
+        $errors = [];
 
-        return $this->twig->render('User/register.html.twig');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $user= array_map('trim', $_POST);
+
+            if (empty($_POST['firstname'])) {
+                $errors['firstname'] = '** Please fill in your first name';
+            } else {
+                $user['firstname'] = $_POST['firstname'];
+            }
+
+            if (empty($_POST['lastname'])) {
+                $errors['lastname'] = '** Please fill in your last name';
+            } else {
+                $user['lastname'] = $_POST['lastname'];
+            }
+
+            if (empty($_POST['username'])) {
+                $errors['username'] = '** Please fill in your username';
+            } else {
+                $user['username'] = $_POST['username'];
+            }
+
+            if (empty($_POST['email'])) {
+                $errors['email'] = '** Please fill in your email';
+            } else {
+                if ($this->model()->findUserByEmail($_POST['email'])) {
+                    $errors['email'] = '** This email has already taken';
+                } else {
+                    $user['email'] = $_POST['email'];
+                }
+            }
+
+            if (empty($_POST['password'])) {
+                $errors['password'] = '** Please fill in your password';
+            } else {
+                if (strlen($_POST['password']) < 6) {
+                    $errors['password'] = '** Password must be at least 6 characters';
+                } else {
+                    $user['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                }
+            }
+
+            if (empty($_POST['confirm_password'])) {
+                $errors['confirm_password'] = '** Please fill in your password confirmation';
+            } else {
+                if ($_POST['password'] !== $_POST['confirm_password']) {
+                    $errors['confirm_password'] = '** Password must be matched';
+                }
+            }
+
+            /*if (empty($_GET['recipe_id'])) {
+                $user['recipe_id'] = null;
+            } else {
+                $user['recipe_id'] = $_GET['recipe_id'];
+            }*/
+
+            if (empty($errors)) {
+                $id = $this->model()->insert($user);
+
+                header('Location:/users/show?id=' . $id);
+                die;
+
+            }
+        }
+        return $this->twig->render('User/register.html.twig', [
+            'errors' => $errors,
+        ]);
     }
 
 
@@ -29,10 +104,8 @@ class UserController extends AbstractController
      */
     public function show(int $id): string
     {
-        $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
 
-        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
+        return $this->twig->render('User/show.html.twig');
     }
 
 

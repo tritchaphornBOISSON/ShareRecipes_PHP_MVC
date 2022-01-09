@@ -25,4 +25,5 @@ return [
 
     'login' => ['UserController', 'login',],
     'register' => ['UserController', 'register',],
+    'users/show' => ['UserController', 'show',['id']],
 ];
