@@ -1,13 +1,12 @@
-# Simple MVC
+# Simple MVC >> ShareRecipes
 
 ## Description
 
-This repository is a simple PHP MVC structure from scratch.
+This project is a personal project, just for practicing.
 
-It uses some cool vendors/libraries such as Twig and Grumphp.
-For this one, just a simple example where users can choose one of their databases and see tables in it.
+The structure of this "framework" is called simple PHP MVC which is provied by WildCodeSchool.
 
-## Steps
+## To run this project on your local
 
 1. Clone the repo from Github.
 2. Run `composer install`.
@@ -41,24 +40,6 @@ An example (a basic list of items) is provided (you can load the *simple-mvc.sql
 * Item deletion [localhost:8000/items/delete?id=:id](localhost:8000/items/delete?id=2)
 
 You can find all these routes declared in the file `src/routes.php`. This is the very same file where you'll add your own new routes to the application.
-
-## How does URL routing work ?
-
-![simple_MVC.png](.tours/simple_MVC.png)
-
-
-## Ask for a tour !
-
-<img src="https://raw.githubusercontent.com/WildCodeSchool/simple-mvc/codetour/.tours/photo-1632178151697-fd971baa906f.jpg" alt="Guided tour" width="150"/>
-
-We prepare a little guided tour to start with the simple-MVC.
-
-To take it, you need to install the `Code Tour` extension for Visual Studio Code : [Code Tour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour)
-
-It will give access to a new menu on your IDE where you'll find the different tours about the simple-MVC. Click on play to start one : 
-
-![menu](https://raw.githubusercontent.com/WildCodeSchool/simple-mvc/codetour/.tours/code_tour_menu.png)
-
 
 
 ## Run it on docker
