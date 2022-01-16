@@ -2,27 +2,16 @@
 
 namespace App\Controller;
 
-use App\Model\ItemManager;
 use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
-    private UserManager $userManager;
+    private UserManager $userModel;
 
-    public function model(): UserManager
+    public function __construct()
     {
-        $this->userManager = new UserManager();
-        return $this->userManager;
-    }
-    /**
-     * List items
-     */
-    public function login(): string
-    {
-        //$userManager = new UserManager();
-        //$items = $itemManager->selectAll('title');
-
-        return $this->twig->render('User/login.html.twig');
+        parent::__construct();
+        $this->userModel = new UserManager();
     }
 
     public function register(): string
@@ -54,7 +43,7 @@ class UserController extends AbstractController
             if (empty($_POST['email'])) {
                 $errors['email'] = '** Please fill in your email';
             } else {
-                if ($this->model()->findUserByEmail($_POST['email'])) {
+                if ($this->userModel->findUserByEmail($_POST['email'])) {
                     $errors['email'] = '** This email has already taken';
                 } else {
                     $user['email'] = $_POST['email'];
@@ -79,17 +68,14 @@ class UserController extends AbstractController
                 }
             }
 
-            /*if (empty($_GET['recipe_id'])) {
-                $user['recipe_id'] = null;
-            } else {
-                $user['recipe_id'] = $_GET['recipe_id'];
-            }*/
+            if (empty($_POST['user_type'])) {
+                $user['user_type'] = 'user';
+            }
 
             if (empty($errors)) {
-                $id = $this->model()->insert($user);
-
-                header('Location:/users/show?id=' . $id);
-                die;
+                $this->userModel->insert($user);
+                header('Location:/login');
+                return '';
 
             }
         }
@@ -98,20 +84,75 @@ class UserController extends AbstractController
         ]);
     }
 
-
-    /**
-     * Show informations for a specific item
-     */
-    public function show(int $id): string
+    public function login(): string
     {
+        $errors = [];
 
-        return $this->twig->render('User/show.html.twig');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = array_map('trim', $_POST);
+            if (empty($_POST['email'])) {
+                $errors['email'] = '** Please fill in your email';
+            } else {
+                $user['email'] = $_POST['email'];
+            }
+            if (empty($_POST['password'])) {
+                $errors['password'] = '** Please fill in your password';
+            } else {
+                $user['password'] = $_POST['password'];
+            }
+//print_r($errors);die;
+            if (empty($errors)) {
+
+                $loggedInUser = $this->userModel->login($user);
+
+                if ($loggedInUser) {
+                    $_SESSION['user_id'] = $loggedInUser['id'];
+                    $_SESSION['username'] = $loggedInUser['username'];
+                    $_SESSION['user_type'] = $loggedInUser['user_type'];
+
+                    if ($loggedInUser['user_type'] === 'admin') {
+                        header('Location:/admin');
+                        return '';
+                    } else {
+                        header('Location:/profile');
+                        return '';
+                    }
+                } else {
+                    $errors['login'] = '** The email or password is incorrect';
+                }
+            }
+        }
+
+        return $this->twig->render('User/login.html.twig', [
+            'errors' => $errors,
+        ]);
     }
 
 
     /**
-     * Edit a specific item
+     * Show informations for a specific item
      */
+    public function profile(): string
+    {
+        $userId = $_SESSION['user_id'];
+        $currentUser = $this->userModel->selectOneById($userId);
+
+        return $this->twig->render('User/profile.html.twig', [
+            'currentUser' => $currentUser,
+        ]);
+    }
+
+
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['username']);
+        unset($_SESSION['user_type']);
+        session_destroy();
+        header('Location: /login');
+        return '';
+    }
+
     public function edit(int $id): string
     {
         $itemManager = new ItemManager();

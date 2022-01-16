@@ -4,14 +4,16 @@
     <div class="container container-section container-75" id="login-form">
         <form action="" method="post">
             <img class="my-5" src="/assets/images/logo-color.png" alt="logo">
-            <h2 class="display-5 mb-3 text-center">Please sign in</h2>
-
+            <h2 class="display-5 mb-3 text-center">Please login</h2>
+            <p class="text-danger text-center">{{ errors['login'] }}</p>
             <div class="form-floating my-2 w-50 center-form">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <span class="text-danger">{{ errors['email'] }}</span>
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating my-2 w-50 center-form">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <span class="text-danger">{{ errors['password'] }}</span>
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="button-login mb-5">

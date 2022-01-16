@@ -31,6 +31,7 @@
                         <div class="mb-1 text-muted">Created at {{ recipe.created_at }}</div>
                     </div>
                     <div class="col-6 p-4 d-flex flex-column position-static">
+                        {% if session.user_id %}
                         <div class="mb-auto">
                             <p class="mb-2">If you want to edit or delete your recipe, please click below.</p>
                             <div class="row">
@@ -44,9 +45,8 @@
                                     </form>
                                 </div>
                             </div>
-
-
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
